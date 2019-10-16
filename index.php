@@ -35,14 +35,19 @@
   
   require_once("controllers/" .strtolower($baseurl) ."_controller.php");
   require_once("views/" .strtolower($baseurl) ."_view.php");
-  $a = new $controller_class();
-  $dispData = $a->exec();
+  $controller_instance = new $controller_class();
+  $dispData = $controller_instance->exec();
+  $contentData = $controller_instance->content_print();
+  $footerData = $controller_instance->footer_print();
+  
   $v = new $view_class();
 
   $template = __DIR__."\\template\\".$template;
 
   
   $v->prerender($template, $dispData);
+  $v->content_print($template, $contentData);
+  $v->footer_print($template, $footerData);
 
 
 ?>

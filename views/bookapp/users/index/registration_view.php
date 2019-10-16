@@ -13,9 +13,9 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/users/
 //   }
 // }
 
-require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
+// require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
 ?>
-  <title>新規登録ページ</title>
+  <!-- <title>新規登録ページ</title>
 </head>
 <body>
   <header id="header">
@@ -23,7 +23,7 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="C:\xampp\htdocs\bookapp\views\bookapp\users\index\registration_view.php ">READ-BOOK-RECORDER</a>
+          <a class='navbar-brand' href='/bookapp/users/index/registration'>READ-BOOK-RECORDER</a>
             <div class="login-icon">
               <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
               <a href="../session/login">ログイン</a>
@@ -32,9 +32,9 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
         </div>
       </nav>
     </div>
-  </header>
+  </header> -->
   
-  <div class="main">
+  <!-- <div class="main">
     <h1> 新規登録</h1>
     <form action="../../users/create/insert" method="post" class="new-user-form">
       <td>
@@ -49,8 +49,8 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
       </td>
       <button type="submit" class="btn btn-success btn-lg">新規登録</button>
     </form>
-  </div>
+  </div> -->
 <?php
-require_once(dirname(dirname(dirname(__FILE__))) . "/index/footer.php");
+// require_once(dirname(dirname(dirname(__FILE__))) . "/index/footer.php");
 
 ?>

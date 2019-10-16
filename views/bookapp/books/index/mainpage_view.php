@@ -109,7 +109,8 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
                                 echo    '</tr>';
                                 $num += 1;
                                 }
-                              }else{header('Location: http://localhost/bookapp/books/new/registration');
+                              }else{
+                                // header('Location: http://localhost/bookapp/books/new/registration');
                               }
                             }else{
                             }
