@@ -5,9 +5,15 @@ h1{
   color: red;
 }
 p{
-  color:  red;
 }
-a{
+a {
+  text-decoration: none;
+  }
+a:hover{
+  text-decoration: none!important;
+}
+.error{
+  color: red !important;
   text-decoration: none;
 }
 .navbar-header{

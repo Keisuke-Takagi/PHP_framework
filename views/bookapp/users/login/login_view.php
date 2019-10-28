@@ -1,18 +1,11 @@
 <?php
-// namespace Bookapp\users\index;
-// require_once(dirname(dirname(dirname(__DIR__)))."/BaseView.php");
-
-// bookappとusersは変数で定義して外部から持ってくる記述が後で必要
 require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/users/connect_view.php");
-
-class Registrationview extends Baseview{
-  public function php_print(){
-  }
-}
 // require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
+Class Loginview extends Baseview{
+  public function php_print(){}
+}
 ?>
-
-  <!-- <title>新規登録ページ</title>
+  <!-- <title>ログインページ</title>
 </head>
 <body>
   <header id="header">
@@ -20,20 +13,20 @@ class Registrationview extends Baseview{
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-          <a class='navbar-brand' href='/bookapp/users/index/registration'>READ-BOOK-RECORDER</a>
+            <a class="navbar-brand" href="registration.php">READ-BOOK-RECORDER</a>
             <div class="login-icon">
               <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
-              <a href="../session/login">ログイン</a>
+              <a href="../index/registration">新規登録</a>
             </div>
           </div>
         </div>
       </nav>
     </div>
-  </header> 
+  </header>
   
-<div class="main">
-    <h1> 新規登録</h1>
-    <form action="../../users/create/insert" method="post" class="new-user-form">
+  <div class="main">
+    <h1> ログイン </h1>
+    <form action="login-function.php" method="post" class="new-user-form">
       <td>
         <tr>
           <p>メールアドレス</p>
@@ -44,9 +37,9 @@ class Registrationview extends Baseview{
           <input type="text" name="password"class="form-input">
         </tr>
       </td>
-      <button type="submit" class="btn btn-success btn-lg">新規登録</button>
+      <button type="submit" class="btn btn-success btn-lg">ログインする</button>
     </form>
   </div> -->
-
-<!-- // require_once(dirname(dirname(dirname(__FILE__))) . "/index/footer.php"); -->
-
+<?php
+// require_once(dirname(dirname(dirname(__FILE__))) . "/index/footer.php");
+?>

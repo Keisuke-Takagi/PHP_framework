@@ -1,53 +1,53 @@
 <?php
-// namespace Bookapp\books\new_form;
+// namespace Bookapp\users\index;
 require_once(dirname(dirname(dirname(__FILE__))) . "\\application_controller.php");
-
-
-class Registrationcontroller extends Applicationcontroller{
+class Logincontroller extends Applicationcontroller {
   public function content_print(){
-    $content = "<title>読んだ本を登録する</title>
+    $content = '
+                <title>ログインページ</title>
                 </head>
                 <body>
-                <header id='header'>
-                    <div class='app-icons'>
-                      <nav class='navbar navbar-default'>
-                        <div class='container-fluid'>
-                          <div class='navbar-header'>
-                            <a class='navbar-brand' href='registration.php'>READ-BOOK-RECORDER</a>
-                            <div class='login-icon'>
-                              <i class='fa fa-user' id='user-login-icon'  aria-hidden='true'></i>
-                              <a href='../../../bookapp/users/logout/logout'>ログアウト</a>
+                  <header id="header">
+                    <div class="app-icons">
+                      <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                          <div class="navbar-header">
+                            <a class="navbar-brand" href="registration.php">READ-BOOK-RECORDER</a>
+                            <div class="login-icon">
+                              <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
+                              <a href="../index/registration">新規登録</a>
                             </div>
                           </div>
                         </div>
                       </nav>
                     </div>
                   </header>
-                  <p>
-                  </p>
-                <body>
-                    <div class='ontents_main'>
-                    <h1> 読んだ本登録フォーム</h1>
-                    <form action='http://localhost/bookapp/books/create/insert' method='post' class='new-user-form'>
-                      <td>
-                        <tr>
-                          <p>本のタイトル</p>
-                          <input type='text' name='title' class='form-input'>
-                        </tr>
-                        <tr>
-                          <p>感想・要約</p>
-                          <textarea name='description' cols='20' rows='10' class='form_book_description'></textarea>
-                        </tr>
-                      </td>
-                      <button type='submit' class='btn btn-success btn-lg'>本の登録</button>
-                    </form>
-                    </div>
-                </body>";
-      return [
-        "content" => "{$content}"
-      ];
+                  <div class="main">
+                  <h1> ログイン </h1>
+                  <form action="../../users/login_function/login_function" method="post" class="new-user-form">
+                    <td>
+                      <tr>
+                        <p>メールアドレス</p>
+                        <input type="text" name="email" class="form-input">
+                      </tr>
+                      <tr>
+                        <p>パスワード</p>
+                        <input type="text" name="password"class="form-input">
+                      </tr>
+                    </td>
+                    <button type="submit" class="btn btn-success btn-lg">ログインする</button>
+                  </form>
+                </div>
+              <?php
+                          ';
+    return [
+      "content" => "{$content}"
+    ];
   }
-  public function new($table_name, $action_name, $page_name, $template){
+  // public function login(){
+
+  // }
+  public function login($table_name, $action_name, $page_name, $template){
     $controller_name = get_class();
     echo $controller_name;
     if (!isset($_SESSION)) {
@@ -57,7 +57,6 @@ class Registrationcontroller extends Applicationcontroller{
       $model_class = $this->model_require($table_name, $action_name, $page_name);
       // モデルインスタンス作成
       $model_instance = new $model_class;
-
       if(isset($_POST['email']) || isset($_POST['title'])){
         // セッターゲッターを使ってエラー表示に変換
         $a = $model_instance->post_setter($_POST['email'],$_POST['password']);
@@ -81,13 +80,12 @@ class Registrationcontroller extends Applicationcontroller{
               $display_data = $v->display_print($template, $array, $view_class);
               return $display_data;
               }else{
-                header('Location: http://localhost/bookapp/users/index/registration');
                 // Modelのバリデーションに失敗  「modelからエラーが来ているときはこっち」
-                // $view_class = $this->view_require($table_name, $action_name, $page_name);
-                // $v = new $view_class;
-                // $array = $this->array_conversion($controller_name);
-                // $display_data = $v->error_print($template, $array, $view_class,$model_result);
-                // return $display_data;
+                $view_class = $this->view_require($table_name, $action_name, $page_name);
+                $v = new $view_class;
+                $array = $this->array_conversion($controller_name);
+                $display_data = $v->error_print($template, $array, $view_class,$model_result);
+                return $display_data;
               }
             // $view_class = $this->view_require($table_name, $action_name, $page_name);
             // $v = new $view_class;

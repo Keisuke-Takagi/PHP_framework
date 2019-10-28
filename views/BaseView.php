@@ -14,7 +14,6 @@ class Baseview {
         print $htmlStr;
         break;
       }
-
     }
     public function footer_print($template, $dispData){
       echo "aa";

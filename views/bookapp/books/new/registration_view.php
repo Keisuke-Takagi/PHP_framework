@@ -1,38 +1,46 @@
 <?php
 require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/books/connect_view.php");
-require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
-?>
-<title>読んだ本を登録する</title>
-</head>
-<body>
-<header id="header">
-    <div class="app-icons">
-      <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="registration.php">READ-BOOK-RECORDER</a>
-            <div class="login-icon">
-              <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
-              <a href="../../../bookapp/users/session/logout">ログアウト</a>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </div>
-  </header>
-  <p>
-<?php
+// require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
+
+// <!-- <title>読んだ本を登録する</title>
+// </head>
+// <body>
+// <header id="header">
+//     <div class="app-icons">
+//       <nav class="navbar navbar-default">
+//         <div class="container-fluid">
+//           <div class="navbar-header">
+//             <a class="navbar-brand" href="registration.php">READ-BOOK-RECORDER</a>
+//             <div class="login-icon">
+//               <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
+//               <a href='../../../bookapp/users/logout/logout'>ログアウト</a>
+//             </div>
+//           </div>
+//         </div>
+//       </nav>
+//     </div>
+//   </header>
+//   <p>
+
+class Registrationview extends Baseview{
+  public function php_print(){
   if (!isset($_SESSION)) {
   session_start();
   echo $_SESSION['EMAIL'];
   }else{
     echo $_SESSION['EMAIL'];
   }
+  }
+  public function php_error_print($e){
+
+  }
+}
   // if(isset($_SESSION['EMAIL'])){
   //   echo "This is main page";
   // }else{header('Location: http://localhost/registration.php');}
 ?>
-</p>
+<form action="file_up.php" enctype="multipart/form-data" method="post"><input name="file_upload" type="file"> <input type="submit" value="アップロード"></form>
+<!-- </p>
 <body>
     <div class="contents_main">
     <h1> 読んだ本登録フォーム</h1>
@@ -50,4 +58,4 @@ require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
       <button type="submit" class="btn btn-success btn-lg">本の登録</button>
     </form>
     </div>
-</body>
+</body> --> 

@@ -1,7 +1,7 @@
 <?php
 // namespace Bookapp\users\index;
 
-class Registrationcontroller {
+class Logoutcontroller {
   public function exec(){
     return[
       "test01" => "これはテストぜろいち",
