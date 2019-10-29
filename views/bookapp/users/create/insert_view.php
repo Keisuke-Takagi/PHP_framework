@@ -30,11 +30,33 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/users/
 //   <a href="registration.php">
   class Insertview extends Baseview{
 
-    public function php_print(){
-      
-      if (!isset($_SESSION)) {
-      session_start();
+    public function php_print($template, $model_results){
+      if($model_results["template_path"] != ""){
+        $htmlStr = file_get_contents($model_results["template_path"]);
+        $layout_path = (dirname(dirname(dirname(dirname(__DIR__))))."/template/bookapp/layout/index.html");
+        $layout = file_get_contents($layout_path);
+        $viewModel = $model_results["model_instance"];
+        foreach ($viewModel->getAll() as $k => $v) {
+          $htmlStr = str_replace("<<".$k.">>", $v, $htmlStr);
+        }
+    
+        $htmlStr = str_replace("<<contents>>", $htmlStr, $layout);
+        print $htmlStr;
       }
+    }
+  
+      // if (!isset($_SESSION)) {
+      // session_start();
+      // }
+      // echo "\n";
+      // if(!isset($_SESSION['EMAIL'])){
+      //   echo "ログアウト中";
+      // }else {
+      //   {
+      //     echo $_SESSION['EMAIL'];
+      //   }
+      // }
+      // echo "\n";
       // if(isset($_SESSION['ERROR'])){
       //   if($_SESSION['ERROR'] == 1) {
       //     echo 'emailの値が不正です<br >前のページへ戻る';
@@ -45,7 +67,7 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/users/
       //   }
       // unset($_SESSION['ERROR']);
       // }
-    }
+    // }
     public function php_error_print($error){
       if ($error == 1) {
         return '入力されたemailが不正です';

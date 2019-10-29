@@ -3,46 +3,74 @@ require_once(dirname(dirname(dirname(__FILE__))) . "\\application_controller.php
 
 
 class Insertcontroller extends Applicationcontroller {
-  public function content_print(){
-    $content = "
-                  <title>新規登録情報エラー</title>
-                  </head>
-                  <body>
-                  <body>
-                    <header id='header'>
-                      <div class='app-icons'>
-                        <nav class='navbar navbar-default'>
-                          <div class='container-fluid'>
-                            <div class='navbar-header'>
-                              <a class='navbar-brand' href='../../../bookapp/users/index/registration'>READ-BOOK-RECORDER</a>
-                              <div class='login-icon'>
-                                <i class='fa fa-user' id='user-login-icon'  aria-hidden='true'></i>
-                                <a href='../../../bookapp/users/login/login'>ログイン</a>
-                              </div>
-                            </div>
-                          </div>
-                        </nav>
-                      </div>
-                    </header>
-                    <div class='main'>
-                    <p>
-                    <a href='../../../bookapp/users/index/registration' class='error'>";
-      return [
-        "content" => "{$content}"
-      ];
+  // public function content_print(){
+  //   $content = "
+  //                 <title>新規登録情報エラー</title>
+  //                 </head>
+  //                 <body>
+  //                 <body>
+  //                   <header id='header'>
+  //                     <div class='app-icons'>
+  //                       <nav class='navbar navbar-default'>
+  //                         <div class='container-fluid'>
+  //                           <div class='navbar-header'>
+  //                             <a class='navbar-brand' href='../../../bookapp/users/index/registration'>READ-BOOK-RECORDER</a>
+  //                             <div class='login-icon'>
+  //                               <i class='fa fa-user' id='user-login-icon'  aria-hidden='true'></i>
+  //                               <a href='../../../bookapp/users/login/login'>ログイン</a>
+  //                             </div>
+  //                           </div>
+  //                         </div>
+  //                       </nav>
+  //                     </div>
+  //                   </header>
+  //                   <div class='main'>
+  //                   <p>
+  //                   <a href='../../../bookapp/users/index/registration' class='error'>";
+  //     return [
+  //       "content" => "{$content}"
+  //     ];
+  // }
+  // public function second_content_print(){
+  //   $content2 = "</a>
+  //               <a href='login.php'>";
+  //   return [
+  //     "content2" => "{$content2}"
+  //   ];
+  // }
+  public function postData($key,$defaultValue = ""){
+    $val = "";
+    if(array_key_exists($key, $_POST)){
+      $val = $_POST[$key];
+    }
+    return $val;
   }
-  public function second_content_print(){
-    $content2 = "</a>
-                <a href='login.php'>";
-    return [
-      "content2" => "{$content2}"
-    ];
+  public function redirect_registration(){
+    if($this->postData('email') == "" || $this->postData('password') == ""){
+      header('Location: http://localhost/bookapp/users/index/registration');
+      $template_path = $this->get_error_template($template, $model_error_num);
+    };
+
   }
-
-
   public function create($table_name, $action_name, $page_name, $template){
-    $controller_name = get_class();
-    echo $controller_name;
+    // ユーザーに関する作成の論理処理を書くところ
+    $model_result = "";
+    $template_path = "";
+    $model_error_num = "";
+    $this->redirect_registration();
+    $model_class = $this->model_require($table_name, $action_name, $page_name);
+    $model_instance = new $model_class;
+    $model_instance->setEmail($this->postData('email'));
+    $model_instance->setPassword($this->postData('password'));
+    $model_result = $this->model_exec($model_class, $action_name);
+    return [
+      "model_instance" => $model_instance,
+      "template_path" => $template_path
+    ];
+    
+
+
+
     if (!isset($_SESSION)) {
       session_start();
       }
@@ -51,7 +79,7 @@ class Insertcontroller extends Applicationcontroller {
       // ------------------------------------------------------------モデルコントローラー
       $model_class = $this->model_require($table_name, $action_name, $page_name);
       // モデルインスタンス作成
-
+      $model_result = $this->model_exec($model_class, $action_name);
       $model_instance = new $model_class;
 
       if(isset($_POST['email']) || isset($_POST['title'])){

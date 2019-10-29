@@ -12,12 +12,24 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/books/
 //   }
 // }
 // require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
-
 class Mainpageview extends Baseview{
-  public function php_print($actionexec){
-    if(isset($_SESSION['COUNT']) && $_SESSION['COUNT'] >= 1){
+  public function php_print($tenplate, $model_results){
+      $htmlStr = "";
       $num = 0;
-      echo  '<thead>
+      $actionexec = $model_results["row"];
+      $count = count($actionexec);
+      $htmlStr .=  '<div class="login-icon">
+      <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
+      <a href="../login/login">ログイン</a>
+    </div>
+    </div>
+    </div>
+    </nav>
+    </div>
+    </header>
+    <div class="main">
+    <table class="table">
+    <thead>
             <tr>
                 <th id="table_title＿id" style="width: 13%;">本のID</th>
                 <th id ="table_title__name" style="width: 24%">本のタイトル</th>
@@ -26,42 +38,103 @@ class Mainpageview extends Baseview{
               </tr>
             </thead>
             <tbody>';
-      while($num  < $_SESSION['COUNT']){
+      while($num  < $count){
             // ここから表示機能
-      echo  '<tr>
+      $htmlStr .=  '<tr>
               <td><p>';
-      echo  $num + 1;
-      echo  ' </p></td>
-              <td><p>';
-      echo  $actionexec[$num]["title"];
-      echo  '  </p></td>
-              <td><p>';
-      echo  $actionexec[$num]["description"];
-      echo  '</p></td>
+      $book_count = $num + 1;
+      $htmlStr .= $book_count;
+      $htmlStr .=  ' </p></td>
+                    <td><p>';
+      $title =  $actionexec[$num]["title"];
+      $htmlStr .= $title;
+      $htmlStr .=  '  </p></td>
+                      <td><p>';
+      $description =  $actionexec[$num]["description"];
+      $htmlStr .= $description;
+      $htmlStr .=  '</p></td>
               <td class="menu-flex-box" style="display: flex; flex-flow: row-reverse;">
               <div>
               <form action="http://localhost/bookapp/books/delete/destroy" method="post" class="new-user-form">
               <input type="hidden"name="';
-              echo $_SESSION['COUNT'];
-              echo '" class="btn btn-danger"value="';
-              echo  $actionexec[$num]["id"];
-              echo'">
+      $htmlStr .= $count; 
+      $htmlStr .=   '" class="btn btn-danger"value="';
+      $bookid = $actionexec[$num]["id"];
+      $htmlStr .= $bookid;
+      $htmlStr .='">
               <input type="submit" class="btn btn-danger"style="margin-right:70px; width: 100px;" value="削除">
               </form></div>
               <div>
               <form action="http://localhost/bookapp/books/edit/edit" method="post" class="edit-book-form">
               <input type="hidden"name="';
-              echo $_SESSION['COUNT'];
-              echo '" class="btn btn-danger" style="margin: 2px 20px;"value="';
-              echo $actionexec[$num]["id"];
-              echo '">
+      $htmlStr .= $count;
+      $htmlStr .= '" class="btn btn-danger" style="margin: 2px 20px;"value="';
+      $htmlStr .= $bookid;
+      $htmlStr .= '">
               <input type="submit" class="btn btn-warning" style="margin-left:70px; width: 100px;" value="編集">
               </form></div></td>';
-      echo    '</tr>';
+      $htmlStr .=    '</tr>';
       $num += 1;
-      }
-    }else{
-    }
+              }
+      $layout_path = (dirname(dirname(dirname(dirname(__DIR__))))."/template/bookapp/layout/index.html");
+      $layout = file_get_contents($layout_path);
+      $viewModel = $model_results["model_instance"];
+      // foreach ($viewModel->getAll() as $k => $v) {
+      //   $htmlStr = str_replace("<<".$k.">>", $v, $htmlStr);
+      // }
+  
+      $htmlStr = str_replace("<<contents>>", $htmlStr, $layout);
+  
+      // foreach ($headerData as $key => $value) {
+      //   $htmlStr = str_replace("<<".$key.">>", $value, $htmlStr);
+      // }
+      // $htmlStr = str_replace("<<", "<", $htmlStr);
+      // $htmlStr = str_replace(">>", ">", $htmlStr);
+      print $htmlStr;
+
+      // $num = 0;
+      // echo  '<thead>
+      //       <tr>
+      //           <th id="table_title＿id" style="width: 13%;">本のID</th>
+      //           <th id ="table_title__name" style="width: 24%">本のタイトル</th>
+      //           <th id="table_title__description" style~"">本の説明</th>
+      //           <th id="table_title__menu" style="width: 13%;">編集・削除</th>
+      //         </tr>
+      //       </thead>
+      //       <tbody>';
+      // while($num  < $_SESSION['COUNT']){
+      //       // ここから表示機能
+      // echo  '<tr>
+      //         <td><p>';
+      // echo  $num + 1;
+      // echo  ' </p></td>
+      //         <td><p>';
+      // echo  $actionexec[$num]["title"];
+      // echo  '  </p></td>
+      //         <td><p>';
+      // echo  $actionexec[$num]["description"];
+      // echo  '</p></td>
+      //         <td class="menu-flex-box" style="display: flex; flex-flow: row-reverse;">
+      //         <div>
+      //         <form action="http://localhost/bookapp/books/delete/destroy" method="post" class="new-user-form">
+      //         <input type="hidden"name="';
+      //         echo $_SESSION['COUNT'];
+      //         echo '" class="btn btn-danger"value="';
+      //         echo  $actionexec[$num]["id"];
+      //         echo'">
+      //         <input type="submit" class="btn btn-danger"style="margin-right:70px; width: 100px;" value="削除">
+      //         </form></div>
+      //         <div>
+      //         <form action="http://localhost/bookapp/books/edit/edit" method="post" class="edit-book-form">
+      //         <input type="hidden"name="';
+      //         echo $_SESSION['COUNT'];
+      //         echo '" class="btn btn-danger" style="margin: 2px 20px;"value="';
+      //         echo $actionexec[$num]["id"];
+      //         echo '">
+      //         <input type="submit" class="btn btn-warning" style="margin-left:70px; width: 100px;" value="編集">
+      //         </form></div></td>';
+      // echo    '</tr>';
+      // $num += 1;
   }
   public function php_error_print($actionexec){
     if(isset($_SESSION['COUNT']) && $_SESSION['COUNT'] >= 1){

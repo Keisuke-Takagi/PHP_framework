@@ -22,6 +22,9 @@ class Bookmodel extends BaseModel{
       }
     }
   }
+  public function getAll(){
+    return "";
+  }
   public function index($records){
     // if(!isset($_SESSION['EMAIL'])){
     //   header('Location: http://localhost/bookapp/users/index/registration');

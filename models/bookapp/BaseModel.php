@@ -25,5 +25,20 @@ class BaseModel{
       return "";
     }
   }
+  public function validation($table_name){
+    $this->error_message = "";
+    if($table_name == "users"){
+      if($_POST['email'] == "" || $_POST['password'] == ""){
+        return 1;
+      }
+      if($_POST['email']!= "" && $_POST['password'] != ""){
+        return "";
+      }
+    }
+    if($table_name == "books"){
+      echo 'エラーｑｑｑｑｑ';
+    }
+  }
+
 }
 ?>

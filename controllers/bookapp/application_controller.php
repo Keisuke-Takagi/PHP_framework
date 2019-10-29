@@ -98,7 +98,7 @@ class Applicationcontroller {
     $controller_instance = new $controller_name();
     $count_content = 0;
     $headerData = $this->exec();
-    var_dump($headerData);
+
     if(method_exists($controller_name,'content_print')){
       $content_array = $controller_instance->content_print();
       $count_content += 1;
@@ -153,6 +153,28 @@ class Applicationcontroller {
     $action_name = $action_name. "_erorr";
     $model_exec = $model_instance->$action_name($e);
     return $model_exec;
+  }
+  public function get_error_template($template_path, $error_num){
+
+    echo "<br>\n" . "モデルエラー番号" . $error_num . "<br>";
+
+    $array_template = explode("\\", $template_path);
+    $template_path = "";
+    foreach ($array_template as $num => $val) {
+      if($num == 8){
+        $template_path .= "error_". $error_num . "_". $val;
+      }else{
+        $template_path .= $val . "\\";
+      }
+    }
+    return $template_path;
+  }
+  public function postData($key,$defaultValue = ""){
+    $val = "";
+    if(array_key_exists($key, $_POST)){
+      $val = $_POST[$key];
+    }
+    return $val;
   }
 }
  

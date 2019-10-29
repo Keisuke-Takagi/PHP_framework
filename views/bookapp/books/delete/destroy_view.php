@@ -3,7 +3,7 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/books/
 
 class Destroyview extends Baseview{
   public function php_print(){
-    return '<p>ああああああああああああああ</p>';
+    return '<p>ああああああああああああ</p>';
   }
   public function php_error_print(){
 
