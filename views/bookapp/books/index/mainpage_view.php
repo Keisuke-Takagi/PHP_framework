@@ -12,6 +12,7 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/books/
 //   }
 // }
 // require_once(dirname(dirname(dirname(__FILE__))) . "/index/head.php");
+
 class Mainpageview extends Baseview{
   public function php_print($actionexec){
     if(isset($_SESSION['COUNT']) && $_SESSION['COUNT'] >= 1){
