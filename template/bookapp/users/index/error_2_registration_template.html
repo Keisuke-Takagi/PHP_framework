@@ -10,6 +10,12 @@
 <div class='main'>
 <h1> 新規登録</h1>
 <div>そのメールアドレスは登録されています</div>
+<br>
+<form action="../login/login" method="post" class="redirect_login">
+<input type="submit" value="ログインへ">
+<input type="hidden" name="email" value="<<email>>" >
+<input type="hidden" name="password" value="">
+</form>
 <form action='../../users/index/registration' method='post' class='new-user-form'>
 <td>
 <tr>

@@ -1,5 +1,57 @@
-<<header>></header>
-<<content>></content>
-<<error>></error>
-<<content2>></content2>
-<<footer>></footer>
+<title>登録本一覧</title>
+<div class="login-icon">
+  <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
+  <a href="../../users/logout/logout">ログアウト</a>
+</div>
+</header>
+
+
+
+<body>
+  <div class="contents_main">
+    <h1 class="my-3 ml-3">読んだ本リスト</h1>
+    <a type="button" class="btn btn-success" style="margin: 10px 0 10px 0; height:50px;   line-height: 33px;" href="../new/registration">読んだ本を登録する</a>
+    <div class="col-5 ml-3">
+        <div class="card">
+            <div class="table-responsive">
+            <table class="table table-responsive table-bordered table-striped table-hover table-responsive" style="white-space: nowrap;">
+                <thead>
+                    <tr>
+                        <th id="table_title＿id" style="width: 5%;">本のID</th>
+                        <th id="table_title__name" style="width: 28%;">本のタイトル</th>
+                        <th id="table_title__description"style="width: 100%;">本の説明</th>
+                        <th id="table_title__menu" style="width: 8%;">編集・削除</th>
+                        
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- ここからテンプレート化 -->
+                    <<book_content>>
+                      <!-- <tr>
+                        <td><p><<book_title>></p>
+                        </td>
+                        <td><p><<book_description>></p>
+                        </td>
+                        <td class="menu-flex-box" style="display: flex; flex-flow: row-reverse;">
+                            <div>
+                              <form action="http://localhost/bookapp/books/delete/destroy" method="post" class="new-user-form">
+                                <<destroy_input>>
+                                <input type="submit" class="btn btn-danger"style="margin-right:70px; width: 100px;" value="削除">
+                              </form>
+                            </div>
+                            <div>
+                              <form action="http://localhost/bookapp/books/edit/edit" method="post" class="edit-book-form">
+                                <<edit_input>>
+                                <input type="submit" class="btn btn-warning" style="margin-left:70px; width: 100px;" value="編集">
+                              </form>
+                            </div>
+                          </td>
+                        </tr> -->
+                    <!-- ここまでテンプレート化 -->
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>

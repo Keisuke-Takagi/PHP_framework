@@ -23,13 +23,17 @@ require_once(dirname(dirname(dirname(dirname(__DIR__)))). "/views/bookapp/books/
 //   <p>
 
 class Registrationview extends Baseview{
-  public function php_print(){
-  if (!isset($_SESSION)) {
-  session_start();
-  echo $_SESSION['EMAIL'];
-  }else{
-    echo $_SESSION['EMAIL'];
-  }
+  public function php_print($template, $model_results){
+    $htmlStr = file_get_contents($model_results["template_path"]);
+    $layout_path = (dirname(dirname(dirname(dirname(__DIR__))))."/template/bookapp/layout/index.html");
+    $layout = file_get_contents($layout_path);
+    // $model_array = $viewModel->getAll();
+    $viewModel = $model_results["model_instance"];
+    foreach ($viewModel->getAll() as $k => $v) {
+      $htmlStr = str_replace("<<".$k.">>", $v, $htmlStr);
+    }
+    $htmlStr = str_replace("<<contents>>", $htmlStr, $layout);
+    print $htmlStr;
   }
   public function php_error_print($e){
 
@@ -39,7 +43,6 @@ class Registrationview extends Baseview{
   //   echo "This is main page";
   // }else{header('Location: http://localhost/registration.php');}
 ?>
-<form action="file_up.php" enctype="multipart/form-data" method="post"><input name="file_upload" type="file"> <input type="submit" value="アップロード"></form>
 <!-- </p>
 <body>
     <div class="contents_main">

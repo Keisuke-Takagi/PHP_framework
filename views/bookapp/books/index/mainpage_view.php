@@ -16,80 +16,30 @@ class Mainpageview extends Baseview{
   public function php_print($tenplate, $model_results){
       $htmlStr = "";
       $num = 0;
-      $actionexec = $model_results["row"];
-      $count = count($actionexec);
-      $htmlStr .=  '<div class="login-icon">
-      <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
-      <a href="../login/login">ログイン</a>
-    </div>
-    </div>
-    </div>
-    </nav>
-    </div>
-    </header>
-    <div class="main">
-    <table class="table">
-    <thead>
-            <tr>
-                <th id="table_title＿id" style="width: 13%;">本のID</th>
-                <th id ="table_title__name" style="width: 24%">本のタイトル</th>
-                <th id="table_title__description" style~"">本の説明</th>
-                <th id="table_title__menu" style="width: 13%;">編集・削除</th>
-              </tr>
-            </thead>
-            <tbody>';
-      while($num  < $count){
-            // ここから表示機能
-      $htmlStr .=  '<tr>
-              <td><p>';
-      $book_count = $num + 1;
-      $htmlStr .= $book_count;
-      $htmlStr .=  ' </p></td>
-                    <td><p>';
-      $title =  $actionexec[$num]["title"];
-      $htmlStr .= $title;
-      $htmlStr .=  '  </p></td>
-                      <td><p>';
-      $description =  $actionexec[$num]["description"];
-      $htmlStr .= $description;
-      $htmlStr .=  '</p></td>
-              <td class="menu-flex-box" style="display: flex; flex-flow: row-reverse;">
-              <div>
-              <form action="http://localhost/bookapp/books/delete/destroy" method="post" class="new-user-form">
-              <input type="hidden"name="';
-      $htmlStr .= $count; 
-      $htmlStr .=   '" class="btn btn-danger"value="';
-      $bookid = $actionexec[$num]["id"];
-      $htmlStr .= $bookid;
-      $htmlStr .='">
-              <input type="submit" class="btn btn-danger"style="margin-right:70px; width: 100px;" value="削除">
-              </form></div>
-              <div>
-              <form action="http://localhost/bookapp/books/edit/edit" method="post" class="edit-book-form">
-              <input type="hidden"name="';
-      $htmlStr .= $count;
-      $htmlStr .= '" class="btn btn-danger" style="margin: 2px 20px;"value="';
-      $htmlStr .= $bookid;
-      $htmlStr .= '">
-              <input type="submit" class="btn btn-warning" style="margin-left:70px; width: 100px;" value="編集">
-              </form></div></td>';
-      $htmlStr .=    '</tr>';
-      $num += 1;
-              }
+      $viewModel = $model_results["model_instance"];
+      $first_html = file_get_contents(dirname(dirname(dirname(dirname(__DIR__)))) . "\\template\bookapp\books\index\bookinfo_mainpage_template.html");
+      $first_layout_path = dirname(dirname(dirname(dirname(__DIR__)))) . "\\template\bookapp\books\index\mainpage_template.html";
+      $first_layout = file_get_contents($first_layout_path);
+      $book_info = $viewModel->getAll();
+      $book_count = $book_info["book_count"];
+      $book_html = $book_info["book_html_array"];
+      while($book_count > $num){
+        $htmlStr .= $first_html;
+        foreach ($viewModel->getKeys() as $key) {
+          $htmlStr = str_replace("<<".$key .">>", $book_html[$key][$num], $htmlStr);
+        }
+        $num += 1;
+      }
+
       $layout_path = (dirname(dirname(dirname(dirname(__DIR__))))."/template/bookapp/layout/index.html");
       $layout = file_get_contents($layout_path);
-      $viewModel = $model_results["model_instance"];
-      // foreach ($viewModel->getAll() as $k => $v) {
-      //   $htmlStr = str_replace("<<".$k.">>", $v, $htmlStr);
-      // }
+
+      $books_view_html = $viewModel->getBookHtmlArray();
+ 
+      $htmlStr = str_replace("<<book_content>>", $htmlStr, $first_layout);
   
       $htmlStr = str_replace("<<contents>>", $htmlStr, $layout);
-  
-      // foreach ($headerData as $key => $value) {
-      //   $htmlStr = str_replace("<<".$key.">>", $value, $htmlStr);
-      // }
-      // $htmlStr = str_replace("<<", "<", $htmlStr);
-      // $htmlStr = str_replace(">>", ">", $htmlStr);
+
       print $htmlStr;
 
       // $num = 0;
@@ -136,6 +86,71 @@ class Mainpageview extends Baseview{
       // echo    '</tr>';
       // $num += 1;
   }
+  // <div class="col-5 ml-3">
+  //       <div class="card">
+  //           <div class="table-responsive">
+  //           <table class="table table-responsive table-bordered table-striped table-hover table-responsive" style="white-space: nowrap;">
+  //                       <thead>
+  //                               <tr>
+  //                                   <th id="table_title＿id" style="width: 13%;">本のID</th>
+  //                                   <th id="table_title__name" style="width: 24%">本のタイトル</th>
+  //                                   <th id="table_title__description" style~""="">本の説明</th>
+  //                                   <th id="table_title__menu" style="width: 13%;">編集・削除</th>
+  //                               </tr>
+  //                             </thead>
+  //                             <tbody><tr>
+  //                                       <td><p>1 </p></td>
+  //                                       <td><p>タイトル  </p></td>
+  //                                       <td><p>本の説明</p></td>
+  //                                       <td class="menu-flex-box" style="display: flex; flex-flow: row-reverse;">
+  //                                       <div>
+  //                                       <form action="delete.php" method="post" class="new-user-form">
+  //                                       <input type="hidden" name="7" class="btn btn-danger" value="4">
+  //                                       <input type="submit" class="btn btn-danger" style="margin-right:70px; width: 100px;" value="削除">
+  //                                       </form></div>
+  //                                       <div>
+  //                                       <form action="edit.php" method="post" class="edit-book-form">
+  //                                       <input type="hidden" name="ああ" class="btn btn-danger" style="margin: 2px 20px;" value="いいい">
+  //                                       <input type="submit" class="btn btn-warning" style="margin-left:70px; width: 100px;" value="編集">
+  //                                       </form></div></td></tr>
+  //               </tbody>
+  //           </table>
+  //         </div>
+
+  //       </div>
+  //   <div class="col-5 ml-3">
+  //       <div class="card">
+  //           <div class="table-responsive">
+  //           <table class="table table-responsive table-bordered table-striped table-hover table-responsive" style="white-space: nowrap;">
+  //                       <thead>
+  //                               <tr>
+  //                                   <th id="table_title＿id" style="width: 13%;">本のID</th>
+  //                                   <th id="table_title__name" style="width: 24%">本のタイトル</th>
+  //                                   <th id="table_title__description" style~""="">本の説明</th>
+  //                                   <th id="table_title__menu" style="width: 13%;">編集・削除</th>
+  //                               </tr>
+  //                             </thead>
+  //                             <tbody><tr>
+  //                                       <td><p>1 </p></td>
+  //                                       <td><p>タイトル  </p></td>
+  //                                       <td><p>本の説明</p></td>
+  //                                       <td class="menu-flex-box" style="display: flex; flex-flow: row-reverse;">
+  //                                       <div>
+  //                                       <form action="delete.php" method="post" class="new-user-form">
+  //                                       <input type="hidden" name="7" class="btn btn-danger" value="4">
+  //                                       <input type="submit" class="btn btn-danger" style="margin-right:70px; width: 100px;" value="削除">
+  //                                       </form></div>
+  //                                       <div>
+  //                                       <form action="edit.php" method="post" class="edit-book-form">
+  //                                       <input type="hidden" name="ああ" class="btn btn-danger" style="margin: 2px 20px;" value="いいい">
+  //                                       <input type="submit" class="btn btn-warning" style="margin-left:70px; width: 100px;" value="編集">
+  //                                       </form></div></td></tr>
+  //               </tbody>
+  //           </table>
+  //         </div>
+
+  //       </div>
+  //   </div></div>
   public function php_error_print($actionexec){
     if(isset($_SESSION['COUNT']) && $_SESSION['COUNT'] >= 1){
       $num = 0;

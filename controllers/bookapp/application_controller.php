@@ -158,13 +158,14 @@ class Applicationcontroller {
 
     echo "<br>\n" . "モデルエラー番号" . $error_num . "<br>";
 
-    $array_template = explode("\\", $template_path);
+    $array_template = explode("/", $template_path);
     $template_path = "";
     foreach ($array_template as $num => $val) {
-      if($num == 8){
+      if($num == 5){
         $template_path .= "error_". $error_num . "_". $val;
-      }else{
-        $template_path .= $val . "\\";
+      }
+      if($num != 5){
+        $template_path .= $val . "/";
       }
     }
     return $template_path;
@@ -175,6 +176,18 @@ class Applicationcontroller {
       $val = $_POST[$key];
     }
     return $val;
+  }
+  public function redirect_new_user_page(){
+    header('Location: http://localhost/bookapp/users/index/registration');
+  }
+  public function login_authentication($model_instance){
+    $e = "";
+    $auth_user_error = $model_instance->Auth_user();
+    if($auth_user_error != ""){
+      $this->redirect_new_user_page();
+      $e = "false";
+    }
+    return $e;
   }
 }
  

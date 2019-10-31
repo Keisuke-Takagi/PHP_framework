@@ -56,6 +56,33 @@ class Mainpagecontroller extends Applicationcontroller {
   //     }
   //     return $results;
   // }
+  public function view_return($rows){
+    $num = 0;
+    $html_array = [];
+    $count_book = [];
+    $title = [];
+    $description = [];
+    $destroy_html = [];
+    $edit_html = [];
+    $count = count($rows);
+    $actionexec = $rows;
+    while($num  < $count){
+      // ここから表示機能
+      $book_title = $rows[$num]["title"];
+      $book_description = $rows[$num]["description"];
+      $destroy_input_html = '<input type="hidden"name="destroy" class="btn btn-danger"value="' .   $actionexec[$num]["id"] . '">';
+      $edit_input_html = '<input type="hidden"name="edit" class="btn btn-danger" style="margin: 2px 20px;"value="' .    $actionexec[$num]["id"].'/'.$actionexec[$num]["title"].'/'.$actionexec[$num]["description"]. '">';
+      $count_book[$num] = $num + 1;
+      $title[$num] = $book_title;
+      $description[$num] = $book_description;
+      $destroy_html[$num] = $destroy_input_html;
+      $edit_html[$num] = $edit_input_html;
+      $num ++;
+    }
+    $html_array = ["book_title" => $title, "count" => $count_book, "description" => $description, "destroy_html" => $destroy_html, "edit_html" => $edit_html];
+      return $html_array;
+  }
+  
   public function index($table_name, $action_name, $page_name, $template){
     $template_path = "";
     $model_error_num = "";
@@ -72,21 +99,21 @@ class Mainpagecontroller extends Applicationcontroller {
       $stmt = $dbh->prepare('select * from users where email = ? ');
       $stmt->execute([$_SESSION['EMAIL']]);
       $row = $stmt->fetch(PDO::FETCH_ASSOC);
-      var_dump($row);
       $user_id = $row['id'];
       $sql = 'select * from books where user_id = ? limit 100';
       $stmt2 = $dbh->prepare($sql);
       $stmt2->execute(array($user_id));
-      $results = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-      echo '<br><br>';
-      var_dump($results);
-      $row = $results;
-
+      $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+      $book_html_array = $this->view_return($rows);
+      $book_count = end($book_html_array["count"]);
+      $model_instance->setBookCount($book_count);
+      $model_instance->setBookHtmlArray($book_html_array);
+      $template_path = $template;
     return [
-      "row" => $row,
       "model_instance" => $model_instance,
-      "template_path" => $template_path
+      "template_path" => $template_path,
     ];
+
     // $controller_name = get_class();
     // echo $controller_name;
     // if (!isset($_SESSION)) {

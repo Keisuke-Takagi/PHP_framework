@@ -6,6 +6,9 @@ h1{
 }
 p{
 }
+form{
+  padding: 0 20px;
+}
 a {
   text-decoration: none;
   }
@@ -46,6 +49,12 @@ a:hover{
 }
 .form-input{
   border: solid 1px black;
+}
+.destroy_button_box{
+  height: 50%;
+}
+.edit_button_box{
+  height: 50%;
 }
 footer{
   clear: both;
@@ -95,7 +104,6 @@ label{
   text-decoration: underline;
 }
 .edit-book-form{
-  width: 400px;
 }
 .form_book_description{
   width: 370px;
@@ -104,6 +112,7 @@ label{
 .book-edit-box__title{
   
 }
+
 table{
   border-collapse: collapse;
   width: 100%;

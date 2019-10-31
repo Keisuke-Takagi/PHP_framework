@@ -2,6 +2,16 @@
 
 require_once( dirname(__DIR__)  . "/BaseModel.php");
 class Bookmodel extends BaseModel{
+  private $book_html_array;
+  private $book_count;
+  private $book_title;
+  private $book_description;
+  private $session_user_id;
+  private $post_edit;
+  private $post_destroy;
+  private $post_id;
+  private $post_title;
+  private $post_description;
   public function __construct(){
     // require_once(dirname(dirname(dirname(__DIR__))) . "\\views\\database.php");
     if (!isset($_SESSION)) {
@@ -22,9 +32,61 @@ class Bookmodel extends BaseModel{
       }
     }
   }
-  public function getAll(){
-    return "";
+
+  public function setPostEdit($val){
+    $this->post_edit = $val;
   }
+  public function getPostEdit(){
+    return  $this->post_edit;
+  }
+  public function setBookHtmlArray($val){
+    $this->book_html_array = $val;
+  }
+  public function getBookHtmlArray(){
+    return $this->book_html_array;
+  }
+  public function setBookCount($val){
+    $this->book_count = $val;
+  }
+  public function setId($val){
+    $this->post_id = $val;
+  }
+  public function getId(){
+    return $this->post_id;
+  }
+  public function setTitle($val){
+    $this->book_title = $val;
+  }
+  public function getTitle(){
+    return $this->book_title;
+  }
+  public function setDescription($val){
+    $this->book_description = $val;
+  }
+  public function getDescription(){
+    return $this->book_description;
+  }
+  public function setSession($val){
+    if (!isset($_SESSION)) {
+      session_start();
+    }
+    $_SESSION["USER_ID"] = $val1;
+  }
+  public function getSession(){
+    if (!isset($_SESSION)) {
+      session_start();
+      }
+    return $_SESSION['EMAIL'];
+  }
+
+  public function setPostDestroy($val){
+    $this->post_destroy = $val;
+  }
+
+  public function getPostDestroy(){
+    return $this->post_destroy;
+  }
+
   public function index($records){
     // if(!isset($_SESSION['EMAIL'])){
     //   header('Location: http://localhost/bookapp/users/index/registration');
@@ -73,19 +135,20 @@ class Bookmodel extends BaseModel{
     }else{
     }
   }
+  
+  public function editValidation($post_info){
+    $e = "";
+    if($_SERVER["REQUEST_METHOD"] == "POST" && $this->post_edit == NULL && $this->post_title == NULL ){
+      $e = 1;
+    }
+    return $e;
+  }
+
   public function edit(){
-    $name = $_SESSION['COUNT'];
-    $book_id = $_POST[$name];
-        require_once(dirname(dirname(dirname(__DIR__))) . "\\views\\database.php");
-    $database = new Database();
-    $dbh = $database->open();
-    $stmt = $dbh->prepare('select * from books where id = ? ');
-    $stmt->execute([$book_id]);
-    $row = $stmt->fetch(PDO::FETCH_ASSOC); 
-    $_SESSION['BOOK_ID'] = $row["id"];
+
   }
   public function update(){
-        // require_once(dirname(dirname(dirname(__DIR__))) . "\\views\\database.php");
+    require_once(dirname(dirname(dirname(__DIR__))) . "\\views\\database.php");
     if($_SESSION['EMAIL'] && $_SESSION['BOOK_ID']){
     $database = new Database();
     $dbh = $database->open();
@@ -101,6 +164,8 @@ class Bookmodel extends BaseModel{
       return "false";
     }
   }
+
+
   public function delete(){
     
     if(!isset($_POST[$_SESSION['COUNT']])){
@@ -111,5 +176,31 @@ class Bookmodel extends BaseModel{
     }
 
   }
+  public function get_while_php(){
+    return "";
+  }
+  public function getKeys(){
+    return ["count","book_title","description", "destroy_html","edit_html"];
+  }
+  public function getAll(){
+    return [
+      'book_html_array' => $this->book_html_array,
+      'book_count' => $this->book_count,
+      'title' => $this->book_title,
+      'description' => $this->book_description,
+      'id' => $this->post_id
+    ];
+  }
+  public function Auth_user(){
+    $user_email = "";
+    $e = "";
+    $user_email = $this->getSession();
+    if($user_email == ""){
+      $e = 1;
+    }
+    return $e;
+  }
+
+
 }
 ?>

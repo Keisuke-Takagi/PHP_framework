@@ -7,6 +7,7 @@
                   <body>
                     <div class="main">
                     <h1>本登録情報編集</h1>
+                      <p class="error">タイトルが入力されていません</p>
                       <form action="../../books/edit/edit" method="post" class="edit-book-form">
                       <td>
                         <div class="book-edit-box__title">
@@ -18,7 +19,7 @@
                             <textarea name="description" cols="20" rows="10" class="form_book_description"><<description>></textarea>
                         </div>
                       </td>
-                       <input type="hidden" name="id"value="<<id>>">
+                       <input type="hidden" name="id" value = "<<id>>">
                        <button type="submit" class="btn btn-success btn-lg">編集を反映する</button>
                     </form>
                   </div>

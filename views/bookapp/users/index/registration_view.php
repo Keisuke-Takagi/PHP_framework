@@ -15,14 +15,7 @@ class Registrationview extends Baseview{
     foreach ($viewModel->getAll() as $k => $v) {
       $htmlStr = str_replace("<<".$k.">>", $v, $htmlStr);
     }
-
     $htmlStr = str_replace("<<contents>>", $htmlStr, $layout);
-
-    // foreach ($headerData as $key => $value) {
-    //   $htmlStr = str_replace("<<".$key.">>", $value, $htmlStr);
-    // }
-    // $htmlStr = str_replace("<<", "<", $htmlStr);
-    // $htmlStr = str_replace(">>", ">", $htmlStr);
     print $htmlStr;
   }
 }

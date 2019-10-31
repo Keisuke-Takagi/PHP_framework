@@ -36,7 +36,12 @@ class BaseModel{
       }
     }
     if($table_name == "books"){
-      echo 'エラーｑｑｑｑｑ';
+      if($_POST['title'] == ""){
+        return 1;
+      }
+      if($_POST['title']!= "" ){
+        return "";
+      }
     }
   }
 
