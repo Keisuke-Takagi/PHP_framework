@@ -25,8 +25,6 @@
   $action_name = $controller_class[2];
   $controller_class = end($controller_class);
   $model_url = $array_url[1];
-
-  // echo '<br> これController_name 将来このコントローラ名使う  [' . $controller_name;
   $view_class = explode("\\", $view);
   $view_class = end($view_class);
   // コントローラクラスの定義
@@ -34,14 +32,13 @@
   $template = strtolower($baseurl) . "_template.html";
   $template = __DIR__."/template/".$template;
   // Model, Controllerファイル呼び出し部分
-  // require_once("controllers/" .strtolower($baseurl) ."_controller.php");
+
   require_once(__DIR__ . "\\controller_require.php");
 
   $controller_instance = new Makecontrollerinstance();
   // ここで実行
 
   $controller_instance = $controller_instance->return_instance($controller_class, $baseurl);
-
 
     $model_results = $controller_instance->$action_name($model_url, $action_name, $page_name, $template);
 
