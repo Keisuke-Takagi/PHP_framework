@@ -1,0 +1,25 @@
+<title>本の編集</title>
+<div class="login-icon">
+  <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
+  <a href="../../users/logout/logout">ログアウト</a>
+</div>
+</header>
+                  <body>
+                    <div class="main">
+                    <h1>本登録情報編集</h1>
+                      <p class="error">タイトルが入力されていません</p>
+                      <form action="../../books/edit/edit" method="post" class="edit-book-form">
+                      <td>
+                        <div class="book-edit-box__title">
+                            <label>本のタイトル</label>
+                            <input type="text" name="title" class="form-input" value="<<title>>">
+                        </div>
+                        <div class="book-edit-box__description">
+                            <label>感想・要約</label>
+                            <textarea name="description" cols="20" rows="10" class="form_book_description"><<description>></textarea>
+                        </div>
+                      </td>
+                       <input type="hidden" name="id" value = "<<id>>">
+                       <button type="submit" class="btn btn-success btn-lg">編集を反映する</button>
+                    </form>
+                  </div>

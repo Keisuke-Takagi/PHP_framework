@@ -1,0 +1,126 @@
+.navbar-brand {
+  color: red;
+}
+
+a {
+  text-decoration: none;
+}
+table {
+  border: solid 2px deepskyblue;
+}
+.navbar-header {
+  width: 100%;
+}
+
+.navbar-brand {
+  float: right;
+  color: blue !important;
+}
+
+.login-icon {
+  float: right;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+#user-login-icon {
+  color: gray;
+  float: left;
+}
+
+.login-text {
+  float: right;
+}
+
+.main {
+  width: 100vw;
+  min-height: 300px;
+  padding: 13px;
+}
+
+.form-input {
+  border: solid 1px black;
+  width: 350px;
+}
+
+footer {
+  clear: both;
+  font-size: 85%;
+  color: #fff;
+  display: block;
+  background-color: black;
+}
+
+ul {
+  display: block;
+  float: left;
+  list-style: none;
+  margin: 3 auto;
+  padding: 0 10px;
+  width: 210px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 3px;
+}
+
+li {
+  display: list-item;
+  color: gray;
+  z-index: 100;
+}
+
+#footermenu {
+  width: 100vw;
+  display: block;
+  background-color: black;
+  margin: 0 auto;
+  float: left;
+  left: 0%;
+}
+
+.title {
+  font-weight: bold;
+  color: yellowgreen;
+}
+
+.footer-link {
+  color: white;
+}
+
+.footer-link:hover {
+  color: white;
+  text-decoration: underline;
+}
+.contents_main{
+  padding: 20px;
+}
+#table_title＿id{
+  border-right: solid 1px black;
+}
+#table_title__name{
+  border-right: solid 1px black;
+}
+.new-user-form{
+  width: 100px;
+}
+.btn{
+  margin-top: 20px;
+}
+#table_title＿description{
+ 
+}
+.form_book_description{
+  border: solid 1px black;
+  width: 350px;
+  height: 100px;
+
+}
+.edit-book-form{
+  direction: rtl;
+}
+.menu-flex-box{
+  display: flex;
+}
+/*# sourceMappingURL=style.css.map */

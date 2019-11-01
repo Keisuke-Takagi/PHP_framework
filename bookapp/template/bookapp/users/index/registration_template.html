@@ -1,0 +1,26 @@
+          <div class='login-icon'>
+            <i class='fa fa-user' id='user-login-icon'  aria-hidden='true'></i>
+            <a href='../login/login'>ログイン</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+<div class='main'>
+  <h1> 新規登録</h1>
+  <div><<error_message>></div>
+  <form action='../../users/index/registration' method='post' class='new-user-form'>
+    <td>
+      <tr>
+        <p>メールアドレス(必須)</p>
+        <input type='text' name='email' value="<<email>>" class='form-input'>
+      </tr>
+      <tr>
+        <p>パスワード(必須)</p>
+        <input type='text' name='password'  value="<<password>>" class='form-input'>
+      </tr>
+    </td>
+    <button type='submit' class='btn btn-success btn-lg'>新規登録</button>
+  </form>
+</div>

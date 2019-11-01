@@ -1,0 +1,20 @@
+<tr>
+    <td><<count>></td>
+    <td><<book_title>></td>
+    <td style="white-space: normal;"><<description>></td>
+    <td class="menu-flex-box" style="display:inline-flex ; flex-flow: row-reverse; padding: 25% 0;">
+        <div class="destroy_button_box">
+          <form action="http://localhost/bookapp/books/delete/destroy" method="post" class="new-user-form">
+            <input type="submit" class="btn btn-danger"style="width: 100px;height: 50px;" value="削除">
+            <<destroy_html>>
+          </form>
+        </div>
+        <div class="edit_button_box">
+          <form action="http://localhost/bookapp/books/edit/edit" method="post" class="edit-book-form">
+ 
+            <input type="submit" class="btn btn-warning" style=" width: 100px;height: 50px;" value="編集">
+            <<edit_html>>
+          </form>
+        </div>
+    </td>
+</tr>

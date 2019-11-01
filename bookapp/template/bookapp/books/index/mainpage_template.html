@@ -1,0 +1,36 @@
+<title>登録本一覧</title>
+<div class="login-icon">
+  <i class="fa fa-user" id="user-login-icon"  aria-hidden="true"></i>
+  <a href="../../users/logout/logout">ログアウト</a>
+</div>
+</header>
+
+
+
+<body>
+  <div class="contents_main">
+    <h1 class="my-3 ml-3">読んだ本リスト</h1>
+    <a type="button" class="btn btn-success" style="margin: 10px 0 10px 0; height:50px;   line-height: 33px;" href="../new/registration">読んだ本を登録する</a>
+    <div class="col-5 ml-3">
+        <div class="card">
+            <div class="table-responsive">
+            <table class="table table-responsive table-bordered table-striped table-hover table-responsive" style="white-space: nowrap;">
+                <thead>
+                    <tr>
+                        <th id="table_title＿id" style="width: 5%;">本のID</th>
+                        <th id="table_title__name" style="width: 28%;">本のタイトル</th>
+                        <th id="table_title__description"style="width: 100%;">本の説明</th>
+                        <th id="table_title__menu" style="width: 8%;">編集・削除</th>
+                        
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <!-- ここからテンプレート化 -->
+                    <<book_content>>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+    </div>
+  </div>
