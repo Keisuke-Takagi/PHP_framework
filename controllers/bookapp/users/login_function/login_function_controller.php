@@ -36,9 +36,6 @@ class Login_functioncontroller extends Applicationcontroller {
     public function login_function($table_name, $action_name, $page_name, $template){
     $controller_name = get_class();
     echo $controller_name;
-    // if (!isset($_SESSION)) {
-    //   session_start();
-    //   }
     require_once(dirname(dirname(dirname(dirname(dirname(__FILE__)))))."\\views\\database.php");
       $database = new Database();
       $dbh = $database->open();
@@ -98,9 +95,6 @@ class Login_functioncontroller extends Applicationcontroller {
                 $display_data = $v->error_print($template, $array, $view_class,$model_result);
                 return $display_data;
               }
-            // $view_class = $this->view_require($table_name, $action_name, $page_name);
-            // $v = new $view_class;
-            // $v->header_print($template, $headerData);
           }else{
             $controller_result = '<br><h3>modelのアクションが定義されていません</h3>';
             return $controller_result;

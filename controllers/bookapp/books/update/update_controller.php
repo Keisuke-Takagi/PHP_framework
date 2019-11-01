@@ -39,17 +39,10 @@ class Updatecontroller extends  Applicationcontroller {
     };
     $controller_name = get_class();
     echo $controller_name;
-
       require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))))."\database.php");
       // ------------------------------------------------------------モデル
       $model_class = $this->model_require($table_name, $action_name, $page_name);
       $model_instance = new $model_class;
-
-      // if(isset($_POST['email']) || isset($_POST['title'])){
-      //   // セッターゲッターを使ってエラー表示に変換
-      //   $a = $model_instance->post_setter($_POST['email'],$_POST['password']);
-      //   $post_checked = $model_instance->post_getter();
-      // }
           // アクションに対応するモデルメソッドが存在するか確認
           $model_method_exec = $this->model_method_exist($model_class, $action_name);
           if(!empty($model_method_exec)){

@@ -1,5 +1,5 @@
 <?php
-// namespace Bookapp\users\index;
+
 require_once(dirname(dirname(dirname(__FILE__))) . "\\application_controller.php");
 
 class Logoutcontroller  extends Applicationcontroller{

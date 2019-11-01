@@ -90,7 +90,6 @@ class Applicationcontroller {
 
     
     return $v;
-    // return $view_class;
   }
 
   public function array_conversion($controller_name){

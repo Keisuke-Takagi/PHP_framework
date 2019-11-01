@@ -2,7 +2,6 @@
 // namespace Bookapp\users\index;
 require_once(dirname(dirname(dirname(__FILE__))) . "\\application_controller.php");
 
-
 class Registrationcontroller extends Applicationcontroller {
 
   public function redirect_book_page(){
