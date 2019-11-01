@@ -9,23 +9,24 @@ class Registrationcontroller extends Applicationcontroller {
   }
 
   public function create($action_name, $model_instance, $model_error_num){
-        var_dump(dirname(dirname(dirname(__DIR__)))) . "\\views\\database.php";
-        require_once(dirname(dirname(dirname(dirname(__DIR__)))) . "\\views\\database.php");
-        $database = new Database();
-        $dbh = $database->open();
-        if(isset($_POST['email'])){
-          $db_emails = "SELECT email FROM users";
-          // Databaseでメールの検索
-          foreach ($dbh->query($db_emails, PDO::FETCH_BOTH) as $value) {
-            if($value["email"] == $_POST['email']){
-              $model_error_num = 2;
-            }
-          }
+    var_dump(dirname(dirname(dirname(__DIR__)))) . "\\views\\database.php";
+    require_once(dirname(dirname(dirname(dirname(__DIR__)))) . "\\views\\database.php");
+    $database = new Database();
+    $dbh = $database->open();
+    if(isset($_POST['email'])){
+      $db_emails = "SELECT email FROM users";
+      // Databaseでメールの検索
+      foreach ($dbh->query($db_emails, PDO::FETCH_BOTH) as $value) {
+        if($value["email"] == $_POST['email']){
+          $model_error_num = 2;
         }
-      if($model_error_num == ""){
-        $model_method = __FUNCTION__;
-        $model_error_num = $model_instance->$model_method();
       }
+    }
+    if($model_error_num == ""){
+      $model_method = __FUNCTION__;
+      $model_error_num = $model_instance->$model_method();
+    }
+
     if($model_error_num == "true"){
       $email = $model_instance->getEmail();
       $model_instance->setSession($email);
@@ -56,6 +57,7 @@ class Registrationcontroller extends Applicationcontroller {
         $model_error_num = $this->create($action_name, $model_instance, $model_error_num);
       }
     }
+    
     if($model_error_num == ""){
       $template_path = $template;
     }
