@@ -26,6 +26,7 @@ class Usermodel extends Basemodel{
   public function getPassword(){
     return $this->password;
   }
+  
   public function setSession($val){
     if (!isset($_SESSION)) {
       session_start();

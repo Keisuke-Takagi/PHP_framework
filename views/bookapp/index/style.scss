@@ -56,6 +56,16 @@ a:hover{
 .edit_button_box{
   height: 50%;
 }
+.file_upload_button{
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 7px 10px 10px 10px;
+  text-decoration: none;
+  color: #FFF;
+  background: #a180dc;
+  transition: .4s;
+}
 footer{
   clear: both;
     font-size: 85%;

@@ -242,16 +242,16 @@ class Mainpageview extends Baseview{
                           //     // エラー箇所
                           //     $database = new Database();
                           //     $dbh = $database->open();
-                          //     $stmt = $dbh->prepare('select * from users where email = ? ');
-                          //     $stmt->execute([$_SESSION['EMAIL']]);
-                          //     $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                              // $stmt = $dbh->prepare('select * from users where email = ? ');
+                              // $stmt->execute([$_SESSION['EMAIL']]);
+                              // $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-                          //     $user_id = $row['id'];
-                          //     $_SESSION['USER_ID'] = $user_id;
-                          //     $sql = 'select * from books where user_id = ? limit 100';
-                          //     $stmt2 = $dbh->prepare($sql);
-                          //     $stmt2->execute(array($user_id));
-                          //     $results = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+                              // $user_id = $row['id'];
+                              // $_SESSION['USER_ID'] = $user_id;
+                              // $sql = 'select * from books where user_id = ? limit 100';
+                              // $stmt2 = $dbh->prepare($sql);
+                              // $stmt2->execute(array($user_id));
+                              // $results = $stmt2->fetchAll(PDO::FETCH_ASSOC);
 
 
 
