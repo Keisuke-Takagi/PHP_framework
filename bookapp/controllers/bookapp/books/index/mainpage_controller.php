@@ -35,14 +35,13 @@ class Mainpagecontroller extends Applicationcontroller {
     $book_count = end($html_array["count"]);
     $model_instance->setBookCount($book_count);
     $model_instance->setBookHtmlArray($html_array);
+    var_dump($html_array);
   }
   
   public function index($table_name, $action_name, $page_name, $template){
-
     $template_path = "";
     $model_error_num = "";
     $model_class = $this->model_require($table_name, $action_name, $page_name);
-      // モデルインスタンス作成
     $model_instance = new $model_class;
     $this->login_authentication($model_instance);
     $dbh = new PDO("mysql:host=127.0.0.1; dbname=test; charset=utf8", 'root','');

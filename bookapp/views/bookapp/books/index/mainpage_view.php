@@ -23,6 +23,7 @@ class Mainpageview extends Baseview{
       }
 
       $layout_path = (dirname(dirname(dirname(dirname(__DIR__))))."/template/bookapp/layout/index.html");
+      
       $layout = file_get_contents($layout_path);
 
       $books_view_html = $viewModel->getBookHtmlArray();

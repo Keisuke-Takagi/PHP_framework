@@ -11,7 +11,6 @@
       $baseurl .= $val . "/";
     }
   }
-  echo $baseurl;
   $array_url = explode("/", $baseurl);
   $app_name = $array_url[0];
   $page_name = end($array_url);

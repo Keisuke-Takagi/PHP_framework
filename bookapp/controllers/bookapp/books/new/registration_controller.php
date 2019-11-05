@@ -3,7 +3,7 @@
 require_once(dirname(dirname(dirname(__FILE__))) . "\\application_controller.php");
 
 
-class Registrationcontroller extends Applicationcontroller{
+class Registrationcontroller extends Applicationcontroller {
 
   public function redirect_book_page(){
     header('Location: http://localhost/bookapp/books/index/mainpage');
@@ -43,11 +43,13 @@ class Registrationcontroller extends Applicationcontroller{
         $this->redirect_book_page();
       }
     }
-
+    if($_SERVER["REQUEST_METHOD"] == "GET"){
+      $template_path = $template;
+    }
     if($model_error_num != "" ){
       $template_path = $this->get_error_template($template, $model_error_num);
     }
-
+    var_dump($template_path);
     return [
       'template_path' => $template_path,
       'model_instance' => $model_instance,
