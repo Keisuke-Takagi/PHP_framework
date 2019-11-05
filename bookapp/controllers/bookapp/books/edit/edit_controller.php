@@ -53,7 +53,6 @@ class Editcontroller extends Applicationcontroller {
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
       $index_post_val = $this->set_model($model_instance);
-      var_dump($model_error_num);
     if($index_post_val == "" && $model_error_num == ""){
       $model_error_num = $this->update($model_instance, $model_error_num);
     }

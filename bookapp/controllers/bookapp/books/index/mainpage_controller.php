@@ -47,15 +47,20 @@ class Mainpagecontroller extends Applicationcontroller {
     $dbh = new PDO("mysql:host=127.0.0.1; dbname=test; charset=utf8", 'root','');
     $database = new Database();
     $dbh = $database->open();
+
+    // ログイン済みのメールアドレスから、ユーザーIDを取得する
     $stmt = $dbh->prepare('select * from users where email = ? ');
     $stmt->execute([$_SESSION['EMAIL']]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
     $user_id = $row['id'];
+    
     $sql = 'select * from books where user_id = ? limit 100';
     $stmt2 = $dbh->prepare($sql);
     $stmt2->execute(array($user_id));
+
     $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
     $this->set_view_info($model_instance, $rows);
+
     $template_path = $template;
     return [
       "model_instance" => $model_instance,

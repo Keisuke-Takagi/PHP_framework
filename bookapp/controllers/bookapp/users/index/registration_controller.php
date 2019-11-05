@@ -9,7 +9,6 @@ class Registrationcontroller extends Applicationcontroller {
   }
 
   public function create($action_name, $model_instance, $model_error_num){
-    var_dump(dirname(dirname(dirname(__DIR__)))) . "\\views\\database.php";
     require_once(dirname(dirname(dirname(dirname(__DIR__)))) . "\\views\\database.php");
     $database = new Database();
     $dbh = $database->open();

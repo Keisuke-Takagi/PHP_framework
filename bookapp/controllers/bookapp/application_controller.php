@@ -13,7 +13,6 @@ class Applicationcontroller {
     $view_class = ucfirst($page_name) . "view";
     $v = new makeviewinstance;
     $v = $v->return_instance($view_class, $view_path);
-    var_dump($v);
     return $v;
   }
 

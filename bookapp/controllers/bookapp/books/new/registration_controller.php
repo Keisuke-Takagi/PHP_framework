@@ -49,7 +49,6 @@ class Registrationcontroller extends Applicationcontroller {
     if($model_error_num != "" ){
       $template_path = $this->get_error_template($template, $model_error_num);
     }
-    var_dump($template_path);
     return [
       'template_path' => $template_path,
       'model_instance' => $model_instance,
