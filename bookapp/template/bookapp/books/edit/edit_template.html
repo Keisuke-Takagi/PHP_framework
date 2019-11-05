@@ -7,8 +7,12 @@
                   <body>
                     <div class="main">
                     <h1>本登録情報編集</h1>
-                      <form action="../../books/edit/edit" method="post" class="edit-book-form">
+                      <form action="../../books/edit/edit" method="post" enctype="multipart/form-data" class="edit-book-form">
                       <td>
+                        <div class="book-edit-box__title">
+                          <label>本の画像</label>
+                          <input type="file" name="upimg">
+                        </div>  
                         <div class="book-edit-box__title">
                             <label>本のタイトル</label>
                             <input type="text" name="title" class="form-input" value="<<title>>">

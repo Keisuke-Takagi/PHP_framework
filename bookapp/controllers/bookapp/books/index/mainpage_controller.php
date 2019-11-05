@@ -35,7 +35,7 @@ class Mainpagecontroller extends Applicationcontroller {
     $book_count = end($html_array["count"]);
     $model_instance->setBookCount($book_count);
     $model_instance->setBookHtmlArray($html_array);
-    var_dump($html_array);
+    // var_dump($html_array);
   }
   
   public function index($table_name, $action_name, $page_name, $template){
@@ -55,6 +55,23 @@ class Mainpagecontroller extends Applicationcontroller {
     $stmt2 = $dbh->prepare($sql);
     $stmt2->execute(array($user_id));
     $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
+    // ------------------------------------ここから
+
+    foreach ($rows as $row) {
+      echo '<br>';
+      echo $row["id"];
+      $book_id = $row["id"];
+      $select = 'select * from images where book_id = ? ';
+      $stmt = $dbh->prepare($select);
+      $stmt->execute(array($book_id));
+      $row_img = $stmt->fetch(PDO::FETCH_ASSOC);
+      var_dump($row_img["id"]);
+      if($row_img != ""){
+        // print($row_img["raw_data"]);
+        echo '<img src="'.$row_img["raw_data"] .'">';
+      }
+    }
+    // ------------------------------ここまで編集
     $this->set_view_info($model_instance, $rows);
     $template_path = $template;
     return [
