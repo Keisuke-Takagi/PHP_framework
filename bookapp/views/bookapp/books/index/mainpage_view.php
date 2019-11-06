@@ -14,6 +14,7 @@ class Mainpageview extends Baseview{
       $book_info = $viewModel->getAll();
       $book_count = $book_info["book_count"];
       $book_html = $book_info["book_html_array"];
+      
       while($book_count > $num){
         $htmlStr .= $first_html;
         foreach ($viewModel->getKeys() as $key) {

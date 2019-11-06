@@ -8,9 +8,30 @@ class Mainpagecontroller extends Applicationcontroller {
   public function __construct(){
     require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))))."\database.php");
   }
- 
+  private function make_image_array($dbh, $rows){
+    $array_image = [];
+    $num = 0;
+    $count = count($rows);
+      while($num  < $count){
+        foreach ($rows as $row) {
+        $book_id = $row["id"];
+        $select = 'select * from images where book_id = ? ';
+        $stmt = $dbh->prepare($select);
+        $stmt->execute(array($book_id));
+        $row_img = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($row_img != ""){
+          $raw_data = '<img src="data:image/jpeg;base64,'.$row_img["raw_data"]. '" width="200"/>';
+          $array_image["book_img"][$num] = $raw_data;
+        }else{
+          $array_image["book_img"][$num] = "";
+        }
+        $num ++;
+      }
+    }
+    return $array_image;
+  }
 
-  public function set_view_info($model_instance, $rows){
+  public function set_view_info($model_instance,$dbh, $rows){
     $num = 0;
     $html_array = [];
     $count_book = [];
@@ -32,10 +53,11 @@ class Mainpagecontroller extends Applicationcontroller {
       $num ++;
     }
     $html_array = ["book_title" => $title, "count" => $count_book, "description" => $description, "destroy_html" => $destroy_html, "edit_html" => $edit_html];
+    $array_image = $this->make_image_array($dbh, $rows);
+    $html_array = $html_array + $array_image;
     $book_count = end($html_array["count"]);
     $model_instance->setBookCount($book_count);
     $model_instance->setBookHtmlArray($html_array);
-    // var_dump($html_array);
   }
   
   public function index($table_name, $action_name, $page_name, $template){
@@ -55,30 +77,7 @@ class Mainpagecontroller extends Applicationcontroller {
     $stmt2 = $dbh->prepare($sql);
     $stmt2->execute(array($user_id));
     $rows = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-    // ------------------------------------ここから
-
-    foreach ($rows as $row) {
-      echo '<br>';
-      echo $row["id"];
-      $book_id = $row["id"];
-      $select = 'select * from images where book_id = ? ';
-      $stmt = $dbh->prepare($select);
-      $stmt->execute(array($book_id));
-      $row_img = $stmt->fetch(PDO::FETCH_ASSOC);
-      var_dump($row_img["id"]);
-      if($row_img != ""){
-        // header('Content-Type: image/jpeg;');
-        echo 'あああああああああ';
-        // $row_img["raw_data"] = imagecreatetruecolor(700, 300);
-        // $img = base64_decode($row_img["raw_data"]);
-        // $img = imagecreatefromstring($row_img["raw_data"]);
-        // print($row_img["raw_data"]);
-        // echo '<img src="'.$row_img["raw_data"] .'">';
-        // imagejpeg($img);
-      }
-    }
-    // ------------------------------ここまで編集
-    $this->set_view_info($model_instance, $rows);
+    $this->set_view_info($model_instance,$dbh, $rows);
     $template_path = $template;
     return [
       "model_instance" => $model_instance,

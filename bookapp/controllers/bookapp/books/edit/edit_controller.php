@@ -68,7 +68,7 @@ class Editcontroller extends Applicationcontroller {
         $image_size = intval($image_size);
         $tmp_name = $_FILES["upimg"]["tmp_name"];
         $raw_data = file_get_contents($tmp_name);
-        $raw_data = base64_decode($raw_data);
+        $raw_data = base64_encode($raw_data);;
 
         //  row_imgが本に対応する画像レコード
         if($row_img != ""){

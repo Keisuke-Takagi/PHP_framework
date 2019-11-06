@@ -173,7 +173,7 @@ class Bookmodel extends BaseModel{
     return "";
   }
   public function getKeys(){
-    return ["count","book_title","description", "destroy_html","edit_html"];
+    return ["count","book_title","book_img","description", "destroy_html","edit_html"];
   }
   public function getAll(){
     return [
