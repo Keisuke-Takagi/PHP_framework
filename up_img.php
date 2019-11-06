@@ -1,22 +1,24 @@
 <?php
-echo __DIR__;
 include dirname(__FILE__) . "/head.php";
 require_once("database.php");
 if($_SERVER['REQUEST_METHOD'] == "POST"){
-  $database = new Database();
+$database = new Database();
 $dbh = $database->open();
 $array = $_FILES["file_upload"];
+
 var_dump($array);
 $image_name = $array["name"];
 $image_type = $array["type"];
 $image_size = $array["size"];
 $tmp_name = $array["tmp_name"];
 $raw_data = file_get_contents($tmp_name);
+$raw_data = base64_encode($raw_data);
 $book_id = 1;
-$stmt = $dbh->prepare('INSERT INTO `images`(`image_name`, `image_type`, `image_size`, `raw_data`, `book_id` )
+$stmt = $dbh->prepare('INSERT INTO `images`(`image_name`, `image_type`, `image_size`, `raw_data`, `book_id` ) 
 VALUES (:image_name, :image_type, :image_size, :raw_data, :book_id)');
-$array = array(':image_name' => $image_name, ':image_type' => $image_type, ':image_size' => $image_size,':raw_data' => $raw_data, ':book_id' => $book_id);
+$array = array(':image_name' => $image_name, 'image_type' => $image_type, 'image_size' => $image_size,'raw_data' => $raw_data, 'book_id' => $book_id,);
 // $stmt->execute($array);
+// header('image.php');
 if ($stmt->execute($array)) {
   echo 'あああああ成功';
 }else {
@@ -25,14 +27,14 @@ if ($stmt->execute($array)) {
 
 
 
-$stmt = $dbh->prepare('select * from images where image_name = ? ');
+$stmt = $dbh->prepare('select * from images where tmp_name = ? ');
 
-if($stmt->execute([$image_name])){
+if($stmt->execute([$tmp_name])){
   $db_imgs = $stmt->fetch(PDO::FETCH_ASSOC);
   $image_name = $db_imgs["image_name"];
   $image_type = $db_imgs["image_type"];
   $image_size = $db_imgs["image_size"];
-  // $tmp_name = $db_imgs["tmp_name"];
+  $tmp_name = $db_imgs["tmp_name"];
   $raw_data = $db_imgs["raw_data"];
   foreach ($db_imgs as $k => $v) {
     echo '<br>' . $k;
@@ -56,7 +58,11 @@ var_dump($image_name);
     <h1> 読んだ本登録フォーム</h1>
     <form action='http://localhost/up_img.php' method='post'  enctype="multipart/form-data"  class='new-user-form'>
       <input name="file_upload" type="file"> 
-      <img src="<?php if(isset($image_name)){echo "bookapp/images/".$image_name;}?>">
+      <!-- <img src=" -->
+      <?php
+      //  if(isset($image_name)){echo "bookapp/images/".$image_name;}
+      ?>
+      <!-- "> -->
       <td>
         <tr>
           <p>本のタイトル</p>

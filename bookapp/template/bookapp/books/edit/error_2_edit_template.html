@@ -8,7 +8,11 @@
                     <div class="main">
                     <h1>本登録情報編集</h1>
                       <p class="error">タイトルが入力されていません</p>
-                      <form action="../../books/edit/edit" method="post" class="edit-book-form">
+                      <form action="../../books/edit/edit"enctype="multipart/form-data" method="post" class="edit-book-form">
+                      <div class="book-edit-box__title">
+                        <label>本の画像</label>
+                        <input type="file" name="upimg">
+                      </div>  
                       <td>
                         <div class="book-edit-box__title">
                             <label>本のタイトル</label>

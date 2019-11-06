@@ -67,8 +67,14 @@ class Mainpagecontroller extends Applicationcontroller {
       $row_img = $stmt->fetch(PDO::FETCH_ASSOC);
       var_dump($row_img["id"]);
       if($row_img != ""){
+        // header('Content-Type: image/jpeg;');
+        echo 'あああああああああ';
+        // $row_img["raw_data"] = imagecreatetruecolor(700, 300);
+        // $img = base64_decode($row_img["raw_data"]);
+        // $img = imagecreatefromstring($row_img["raw_data"]);
         // print($row_img["raw_data"]);
-        echo '<img src="'.$row_img["raw_data"] .'">';
+        // echo '<img src="'.$row_img["raw_data"] .'">';
+        // imagejpeg($img);
       }
     }
     // ------------------------------ここまで編集
