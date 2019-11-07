@@ -6,20 +6,30 @@
 </header>
 <body>
     <div class='ontents_main'>
-    <h1> 読んだ本登録フォーム</h1>
+    <h1 class="book_new_title"> 読んだ本登録フォーム</h1>
     <p class="error">タイトルが入力されていません</p>
-    <form action='http://localhost/bookapp/books/new/registration' method='post' class='new-user-form'>
+    <form action='http://localhost/bookapp/books/new/registration' method='post' enctype="multipart/form-data" class='new-user-form'>
       <td>
         <tr>
-          <p>本のタイトル</p>
-          <input type='text' name='title' class='form-input'>
+          <div class="book-new-box">
+              <label class="book_new_label">本の画像</label>
+              <input type="file" name="upimg">
+          </div>
         </tr>
         <tr>
-          <p>感想・要約</p>
-          <textarea name='description' cols='20' rows='10' class='form_book_description'></textarea>
+          <div class="book-new-box">
+            <label class="book_new_label">本のタイトル</label>
+            <input type='text' name='title' class='form-input'>
+          </div>
+        </tr>
+        <tr>
+          <div class="book-new-box">
+            <label class="book_new_label">感想・要約</label>
+            <textarea name='description' cols='20' rows='10' class='form_book_description'></textarea>
+          </div>
         </tr>
       </td>
-      <button type='submit' class='btn btn-success btn-lg'>本の登録</button>
+      <button type='submit' class='btn btn-success btn-lg' style="margin: 10px 0;">本の登録</button>
     </form>
     </div>
 </body>

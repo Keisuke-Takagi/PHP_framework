@@ -12,6 +12,9 @@ form{
 a {
   text-decoration: none;
   }
+button{
+  margin: 10px 0;
+}
 a:hover{
   text-decoration: none!important;
 }
@@ -49,12 +52,14 @@ a:hover{
 }
 .form-input{
   border: solid 1px black;
+  display: block;
 }
 .destroy_button_box{
-  height: 50%;
+  display: inline-block;
 }
 .edit_button_box{
-  height: 50%;
+  display: inline-block;
+  
 }
 .file_upload_button{
   position: relative;
@@ -118,6 +123,7 @@ label{
 .form_book_description{
   width: 370px;
   border: solid 1px black;
+  display: block;
 }
 .book-edit-box__title{
   
@@ -138,4 +144,19 @@ table{
 .contents_main{
   padding: 20px 0;
   width: 100%;
+}
+.book_new_label{
+  display: contents;
+}
+.book-new-box{
+  padding: 10px 0;
+}
+.book_new_title{
+  padding: 0 0 0 20px;
+}
+.menu-flex-box{
+  flex-flow: row-reverse;
+  list-style: none;
+  padding: 0;
+  vertical-align: middle!important;
 }

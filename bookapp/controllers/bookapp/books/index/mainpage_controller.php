@@ -8,6 +8,7 @@ class Mainpagecontroller extends Applicationcontroller {
   public function __construct(){
     require_once(dirname(dirname(dirname(dirname(dirname(dirname(__FILE__))))))."\database.php");
   }
+  // imageの情報を取得しHTMLの<img>にし配列化
   private function make_image_array($dbh, $rows){
     $array_image = [];
     $num = 0;
@@ -31,7 +32,8 @@ class Mainpagecontroller extends Applicationcontroller {
     return $array_image;
   }
 
-  public function set_view_info($model_instance,$dbh, $rows){
+  // viewに表示する値を配列化してmodelにセットする
+  private function set_view_info($model_instance,$dbh, $rows){
     $num = 0;
     $html_array = [];
     $count_book = [];
